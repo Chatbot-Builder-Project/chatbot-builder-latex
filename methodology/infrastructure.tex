@@ -1,0 +1,83 @@
+\section{Infrastructure}
+\label{sec:infrastructure}
+
+\subsection{Architectural Approach}
+The infrastructure was designed using Infrastructure-as-Code (IaC) principles with three core components:
+
+\begin{itemize}
+    \item \textbf{Terraform}: For provisioning cloud resources on Azure, leveraging Terraform Cloud for state management.
+    \item \textbf{Kubernetes}: For container orchestration and deployment management using Azure Kubernetes Service (AKS).
+    \item \textbf{GitHub Actions}: For CI/CD pipeline automation, managing infrastructure provisioning and application deployment.
+\end{itemize}
+
+This combination enables reproducible environments and automated deployment processes across staging and production environments.
+
+\subsection{Terraform Implementation}
+The Terraform configuration manages the complete Azure infrastructure through modular components:
+
+\begin{itemize}
+    \item \textbf{Resource Groups}: Logical containers for Azure resources.
+    \item \textbf{AKS Clusters}: Kubernetes clusters with auto-scaling node pools.
+    \item \textbf{Blob Storage}: Azure Blob Storage for persistent data storage.
+    \item \textbf{Public IPs}: Dedicated IP addresses per environment, injected into Kubernetes manifests.
+\end{itemize}
+
+\begin{lstlisting}[language=HCL,caption=Sample Terraform module for AKS]
+module "aks" {
+  source              = "./modules/aks"
+  environment         = "staging"
+  node_count         = 3
+  vm_size            = "Standard_D2_v2"
+  dns_prefix         = "chatbot-builder-staging"
+  resource_group_name = azurerm_resource_group.main.name
+}
+\end{lstlisting}
+
+Terraform outputs include:
+\begin{itemize}
+    \item \textbf{Kubernetes Configuration}: Kubeconfig file for cluster authentication.
+    \item \textbf{Public IPs}: Used for Load Balancers and injected into Kubernetes manifests.
+\end{itemize}
+
+\subsection{Kubernetes Orchestration}
+The Kubernetes implementation follows a multi-environment strategy using Kustomize:
+
+\begin{itemize}
+    \item \textbf{Base Configuration}: Common resources (Pods, Services, Ingress).
+    \item \textbf{Environment Overlays}: Staging and Production-specific customizations.
+    \item \textbf{Secret Management}: Kubernetes secrets encrypted with SealedSecrets.
+\end{itemize}
+
+Deployment follows this phased approach:
+\begin{enumerate}
+    \item Persistent Volume Claims for storage.
+    \item ConfigMaps for environment variables.
+    \item Microservice deployments.
+    \item Network policies and ingress rules.
+\end{enumerate}
+
+Directory structure:
+\begin{itemize}
+    \item \textbf{base/}: Core manifests including ConfigMaps, PVCs, Deployments, and Services.
+    \item \textbf{overlays/}: Staging and production configurations.
+    \item \textbf{secrets/}: Templates for Kubernetes secrets, applied manually before automation.
+\end{itemize}
+
+\subsection{CI/CD Pipeline}
+The CI/CD pipeline is managed with GitHub Actions and follows GitOps principles.
+Key workflows:
+
+\begin{itemize}
+    \item \textbf{Terraform Deployment}: Runs on changes to the `infra/` directory.
+    \begin{itemize}
+        \item Initializes Terraform and validates configuration.
+        \item Applies infrastructure changes if on `main` branch.
+        \item Outputs kubeconfig and public IPs.
+    \end{itemize}
+    \item \textbf{Kubernetes Deployment}: Triggered via repository dispatch for staging/production.
+    \begin{itemize}
+        \item Fetches Terraform outputs (Kubernetes config, public IPs).
+        \item Updates Kubernetes manifests with correct environment values.
+        \item Deploys microservices and infrastructure resources to AKS.
+    \end{itemize}
+\end{itemize}
