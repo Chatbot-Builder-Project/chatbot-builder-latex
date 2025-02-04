@@ -1,0 +1,144 @@
+\documentclass[12pt, a4paper]{report}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinelanguage{HCL}{
+  morekeywords={module,resource,variable,output,provider,terraform},
+  sensitive=false,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+\lstset{
+  language=HCL,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{gray}\itshape,
+  breaklines=true,
+  captionpos=b
+}
+
+% Code listing settings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Introduction% Introduction
+%   Background - Abstract
+%   the project idea
+%   Our goal - objectives
+% Literature Review
+%   Already existing solutions
+%   Missing solutions - gap
+%   What will we do - visual programming tool that combines both approaches
+% Methodology
+%   Overview of the system
+%   every drawing we have
+%   Backend Architecutre:
+%       Why we used ddd, microservices, kubernetes, terraform, asp.net, python service, databases, deployment
+%   Frontend Architecutre: ...
+% Testing and Evaluation
+%   what api endpoints have we implemented in the backend
+%   testing these endpoints and adding all the validation
+%   talk about the code, some of the important snippets
+% Results and Discussion
+%   Frontend interfaces
+%   discussion of the result
+%   did it work ?
+%   how quick it is
+%   how expensive it is
+%   future work ?
+% Conclusion and Recommendations
+%   short conclusion
+%   sahej
+% References
+%   websites, papers
+% Appendices
+%   github repositories
+
+
+
+% Document Info
+\title{
+    \includegraphics[height=5cm]{assets/NNU_Logo.png} \\[1cm]
+    \includegraphics[height=2.5cm]{assets/FlowX_Logo.png} \\[1cm]
+    FlowX: A Visual Building Tool that Merges Static Chatbot Flows with Dynamic LLM Responses
+}
+\author{
+    Izzat Alsharif \\
+    Amjad Kayed
+    \\\\
+    \textbf{Supervisor:} Dr. Amjad Abu Hassan
+}
+\date{January 31, 2025}
+
+\begin{document}
+
+% Front matter
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Abstract
+\begin{abstract}
+This thesis presents FlowX, ...
+\end{abstract}
+
+
+\include{introduction}
+
+\include{literature_review}
+
+\chapter{Methodology}
+\include{methodology/chatbot_builder}
+\include{methodology/system_design}
+\include{methodology/backend}
+\include{methodology/frontend}
+\include{methodology/infrastructure}
+\include{methodology/project_management}
+
+% \appendix
+
+\bibliographystyle{IEEEtran}
+\renewcommand{\bibname}{References}
+
+\bibliography{references}
+
+\end{document}
