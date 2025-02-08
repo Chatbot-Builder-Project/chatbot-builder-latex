@@ -1,3 +1,21 @@
+\lstdefinelanguage{HCL}{
+  morekeywords={module,resource,variable,output,provider,terraform},
+  sensitive=false,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+\lstset{
+  language=HCL,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{gray}\itshape,
+  breaklines=true,
+  captionpos=b
+}
+
 \section{Infrastructure}
 \label{sec:infrastructure}
 
