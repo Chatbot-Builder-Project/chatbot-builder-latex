@@ -4,15 +4,40 @@
 Chatbots have become a cornerstone of modern digital interactions, bridging the gap between businesses and users through automated, yet personalized communication. Initially designed as rule-based systems with rigid decision trees, chatbots have evolved into dynamic agents powered by artificial intelligence (AI) and natural language processing (NLP). Despite this evolution, the current landscape of chatbot development tools remains fragmented. Solutions today are polarized: they either focus on static, flow-based designs (e.g. ManyChat, Chatfuel) or fully AI-driven interactions (e.g., Dialogflow, Rasa), with few attempts to integrate both approaches effectively. This divide limits developers' ability to create chatbots that are both predictable in structured workflows and adaptable to dynamic user input. Furthermore, existing tools often lack critical features such as advanced customization, extensibility through marketplaces, and flexible deployment options—gaps that hinder innovation and scalability in chatbot development.
 
 \section{Terminology}
-To ensure clarity, the key terms used in this document are defined below.
+To ensure clarity throughout this report, key terms and concepts are defined below:
+
+\subsection{Core Concepts}
 \begin{itemize}
     \item \textbf{Chatbot}: A software application designed to simulate human conversation through text or voice interactions, often used for customer support, information retrieval, or task automation.
-    \item \textbf{No-Code/Low-Code Platforms}: Tools that enable users to build software applications (e.g., chatbots) without requiring extensive programming knowledge, typically using visual interfaces and drag-and-drop components.
-    \item \textbf{NLP (Natural Language Processing)}: A subfield of artificial intelligence (AI) focused on enabling machines to understand, interpret, and generate human language.
-    \item \textbf{LLM (Large Language Model)}: Advanced AI models, such as GPT-4 and Claude 3.5 Sonnet, are trained on vast datasets to generate human-like text and respond contextually to user input.
-    \item \textbf{API (Application Programming Interface)}: A set of protocols that allow different software systems to communicate and share data. In this document, APIs refer exclusively to REST APIs.
-    \item \textbf{Rule-Based Chatbot}: A chatbot that follows predefined decision trees or workflows to respond to user input.
-    \item \textbf{Dynamic Chatbot}: A chatbot that uses AI/ML to adapt its responses based on context and unstructured input.
+    
+    \item \textbf{Static Workflow}: A predefined conversation path using decision trees and fixed responses, offering predictable and structured interactions.
+    
+    \item \textbf{Dynamic Routing}: The ability to determine conversation flow based on AI analysis of user intent rather than predefined rules.
+    
+    \item \textbf{Hybrid Approach}: The combination of static workflows with dynamic, AI-powered interactions in a single chatbot system.
+
+\end{itemize}
+
+\subsection{Technology Stack}
+\begin{itemize}
+    \item \textbf{LLM (Large Language Model)}: Advanced AI models trained on vast datasets to generate human-like text and understand context.
+    
+    \item \textbf{LangChain}: A framework for developing applications powered by language models, used in our executor service.
+    
+    \item \textbf{Microservices}: An architectural style where the application is structured as a collection of loosely coupled services.
+    
+    \item \textbf{gRPC}: A high-performance RPC (Remote Procedure Call) framework used for communication between services.
+    
+    \item \textbf{Infrastructure as Code (IaC)}: The practice of managing and provisioning infrastructure through code rather than manual processes.
+\end{itemize}
+
+\subsection{Development Concepts}
+\begin{itemize}
+    \item \textbf{No-Code/Low-Code}: Development approach that enables users to create applications through visual interfaces rather than traditional programming.
+    
+    \item \textbf{Visual Builder}: A drag-and-drop interface for creating and modifying chatbot workflows without coding.
+    
+    \item \textbf{Visual Editor}: Interface for customizing the chatbot's appearance and user interface elements.
 \end{itemize}
 
 \section{Objectives}
