@@ -96,7 +96,6 @@
 \maketitle
 \tableofcontents
 \listoffigures
-\listoftables
 
 % Abstract
 \begin{abstract}
@@ -120,8 +119,65 @@ Built on a microservices architecture with ASP.NET Core, Python/LangChain, and R
 \input{methodology/infrastructure}
 \input{methodology/project_management}
 
+\input{results}
 
-% \appendix
+\appendix
+\chapter{Source Code Repositories}
+The complete source code for the FlowX platform is organized across multiple repositories within the Chatbot Builder Project organization on GitHub (\url{https://github.com/Chatbot-Builder-Project}). This appendix provides details about each repository's purpose and contents.
+
+\section{Repository Structure}
+\begin{itemize}
+    \item \textbf{chatbot-builder-api}
+    \begin{itemize}
+        \item Main API Gateway service
+        \item Handles authentication and authorization
+        \item Manages workflow execution and state
+        \item Implements the domain model and business logic
+        \item Built with ASP.NET Core
+    \end{itemize}
+    
+    \item \textbf{chatbot-builder-client}
+    \begin{itemize}
+        \item Frontend application
+        \item Implements the workflow builder interface
+        \item Provides visual customization tools
+        \item Built with React Native for cross-platform support
+    \end{itemize}
+    
+    \item \textbf{chatbot-builder-executor}
+    \begin{itemize}
+        \item LangChain execution service
+        \item Handles LLM integration and dynamic routing
+        \item Implements the Python-based execution engine
+        \item Communicates with API via gRPC
+    \end{itemize}
+    
+    \item \textbf{chatbot-builder-infra}
+    \begin{itemize}
+        \item Infrastructure as Code repository
+        \item Contains Terraform configurations for Azure resources
+        \item Includes Kubernetes manifests for deployment
+        \item Manages CI/CD pipelines with GitHub Actions
+    \end{itemize}
+    
+    \item \textbf{chatbot-builder-protos}
+    \begin{itemize}
+        \item Protocol Buffer definitions
+        \item Defines service contracts for gRPC communication
+        \item Shared between API and Executor services
+    \end{itemize}
+\end{itemize}
+
+\section{Development Workflow}
+The repositories follow a microservices architecture pattern, with each service independently versioned and deployed. The development workflow includes:
+\begin{itemize}
+    \item Feature branches for development
+    \item Pull request reviews for code quality
+    \item Automated testing in CI/CD pipelines
+    \item Automated deployment to staging and production
+\end{itemize}
+
+For detailed setup and contribution guidelines, refer to each repository's README file.
 
 \bibliographystyle{IEEEtran}
 \renewcommand{\bibname}{References}
