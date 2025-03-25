@@ -1,18 +1,80 @@
 \section{Frontend}
 
-\subsection{Overview}
-The frontend of FlowX is built with \textbf{React Native} to support cross-platform mobile development. It provides an intuitive UI for creating chatbot workflows using a drag-and-drop interface.
-
-\subsection{Key Features}
+\subsection{Overview and Architecture}
+The frontend of FlowX is built with \textbf{React Native}, providing a cross-platform mobile development solution. The application follows a component-based architecture with clear separation of concerns:
 \begin{itemize}
-\item \textbf{Visual Workflow Builder}: Allows users to design chatbot logic using a flowchart-like interface.
-\item \textbf{User Interaction Management}: Supports user inputs, chatbot responses, and dynamic content display.
-\item \textbf{API Communication}: Interacts with the backend via RESTful API.
+    \item \textbf{Presentation Layer}: React Native components and screens
+    \item \textbf{State Management}: Redux store with middleware for side effects
+    \item \textbf{Service Layer}: API client and WebSocket handlers
+    \item \textbf{Utils}: Helper functions and shared utilities
 \end{itemize}
 
-\subsection{Technology Stack}
+\subsection{Visual Workflow Builder}
+The core of the application is the visual workflow builder, implemented with several specialized components:
+
 \begin{itemize}
-\item \textbf{React Native}: Able to develop cross-platform mobile app.
-\item \textbf{Redux}: Manages application state efficiently.
-\item \textbf{RESTful APIs}: Makes a seamless communication with the backend.
+    \item \textbf{Canvas Management}:
+    \begin{itemize}
+        \item Infinite canvas with pan and zoom capabilities
+        \item Grid-based snapping for precise node placement
+        \item Multi-select and bulk operations
+    \end{itemize}
+    
+    \item \textbf{Node System}:
+    \begin{itemize}
+        \item Drag-and-drop node creation and positioning
+        \item Smart port connection system with type validation
+        \item Real-time node state visualization
+        \item Custom node templates for different interaction types
+        \item Bezier curve connections with interactive editing
+    \end{itemize}
+
+    \item \textbf{Node Editor}:
+    \begin{itemize}
+        \item Rich text editor for message templates
+        \item Dynamic form generation for node configuration
+        \item Each node with its own properties
+    \end{itemize}
+    
+    \item \textbf{Chat Designer}:
+    \begin{itemize}
+        \item Live preview of chatbot behavior
+        \item Mobile-first chat interface
+        \item Allows for designing the visuals of the chatbot
+    \end{itemize}
+\end{itemize}
+
+\subsection{State Management and Performance}
+The application uses Redux for state management with several optimizations for performance:
+
+\begin{itemize}
+    \item \textbf{Store and Updates}:
+    \begin{itemize}
+        \item Normalized state shape for efficient updates
+        \item Separate slices for UI state and domain data
+        \item Optimistic updates for better responsiveness
+        \item Redux Thunk for async operations
+        \item Persistence middleware for auto-saving
+    \end{itemize}
+    
+    \item \textbf{Performance Optimizations}:
+    \begin{itemize}
+        \item Virtual scrolling for large workflows
+        \item Lazy loading of node components
+        \item Memoization of expensive computations
+        \item Batched updates for multiple changes
+        \item Debounced save operations
+        \item Selective re-rendering using React.memo
+    \end{itemize}
+\end{itemize}
+
+\subsection{Cross-Platform Design}
+The application ensures consistent behavior across platforms through:
+
+\begin{itemize}
+    \item \textbf{Responsive Design}:
+    \begin{itemize}
+        \item Platform-specific UI adjustments
+        \item Adaptive layouts for different screen sizes
+    \end{itemize}
 \end{itemize}

@@ -25,7 +25,49 @@ Built with \textbf{ASP.NET Core}, this service handles:
 \item \textbf{Executor Communication}: Delegates execution via gRPC.
 \end{itemize}
 
+\subsection{Domain Model}
+The API service implements a rich domain model to support both user management and chatbot workflow functionality. Figure \ref{fig:system_uml} shows the core domain entities and their relationships.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{assets/SystemUmlDiagram.png}
+    \caption{Core Domain Model Class Diagram}
+    \label{fig:system_uml}
+\end{figure}
+
+The domain model is centered around these key entities:
+\begin{itemize}
+    \item \textbf{User}: Manages authentication and profile data, including role-based access control
+    \item \textbf{Chatbot}: Encapsulates chatbot configuration and references to its workflow implementation
+    \item \textbf{Workflow}: Contains the complete chatbot logic as a graph structure
+    \item \textbf{Graph}: Maintains the topology of nodes and connections that define the chatbot's behavior
+    \item \textbf{Conversation}: Handles state management for ongoing user interactions
+\end{itemize}
+
+\subsection{Graph Implementation}
+The workflow execution engine is built on a sophisticated graph structure (Figure \ref{fig:graph_uml}) that enables both static flows and dynamic LLM-powered interactions.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{assets/GraphUmlDiagram.png}
+    \caption{Graph Implementation Class Diagram}
+    \label{fig:graph_uml}
+\end{figure}
+
+The graph implementation includes:
+\begin{itemize}
+    \item \textbf{Node}: Abstract base class defining common node behavior
+    \item \textbf{Input/Output Ports}: Strongly-typed connection points enabling type-safe data flow
+    \item \textbf{Flow/Data Links}: Distinct connection types for control flow vs data transfer
+    \item \textbf{Specialized Nodes}:
+    \begin{itemize}
+        \item \textbf{Interaction Node}: Manages user input/output with templating support
+        \item \textbf{Generation Node}: Interfaces with the Executor service for LLM operations
+        \item \textbf{Switch Node}: Implements both static and LLM-powered conditional branching
+        \item \textbf{Static Node}: Provides deterministic responses
+        \item \textbf{API Action Node}: Enables integration with external services
+    \end{itemize}
+\end{itemize}
 
 \subsection{Executor Microservice}
 Developed in \textbf{Python} with \textbf{LangChain}, responsible for:
